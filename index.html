@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yardeni Research Morning Briefing Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 2rem;
+    }
+    .question h3 {
+      margin-bottom: 0.5rem;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    .options button.correct {
+      background-color: #c8e6c9;
+      border-color: #388e3c;
+    }
+    .options button.wrong {
+      background-color: #ffcdd2;
+      border-color: #d32f2f;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .explanation {
+      margin-top: 0.5rem;
+      font-size: 0.97em;
+      color: #345;
+      background: #f2f6fa;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Yardeni Research Morning Briefing Quiz</h1>
+    <!-- Example for first two questions. Continue for all 12 using the same data-correct structure. -->
+    <div class="question"><h3>1. What significant trade policy change occurred between the US and China recently?</h3>
+      <div class="options">
+        <button>A) China increased tariffs on US imports to 145%</button>
+        <button>B) The US imposed new sanctions on China</button>
+        <button data-correct="true" data-explain="According to the briefing, &quot;News that Donald Trump is slashing China tariffs to 30% from 145% is being heralded as the game-changer the region needs.&quot;">C) Trump slashed China tariffs from 145% to 30%</button>
+        <button>D) China banned all US imports completely</button>
+      </div>
+    </div>
+    <div class="question"><h3>2. What reciprocal action did China take in response to the US tariff reduction?</h3>
+      <div class="options">
+        <button>A) Increased military presence in the South China Sea</button>
+        <button data-correct="true" data-explain='The briefing states: &quot;China stepping back from the brink helps, too. Xi cut levies on US imports to 10% from 125%.&quot;'>B) Cut levies on US imports to 10% from 125%</button>
+        <button>C) Banned American technology companies</button>
+        <button>D) Increased rare earth exports by 50%</button>
+      </div>
+    </div>
+    <!-- ... Continue for all 12 questions ... -->
+  </div>
+
+  <script>
+    document.querySelectorAll(".options button").forEach(button => {
+      button.addEventListener("click", () => {
+        const parent = button.closest(".options");
+        const buttons = parent.querySelectorAll("button");
+        const correct = parent.querySelector("button[data-correct='true']");
+        buttons.forEach(b => {
+          b.disabled = true;
+          if (b === correct) {
+            b.classList.add("correct");
+          } else if (b === button && b !== correct) {
+            b.classList.add("wrong");
+          }
+        });
+        // Show explanation if available
+        if (correct.dataset.explain && !parent.querySelector('.explanation')) {
+          const exp = document.createElement('div');
+          exp.className = 'explanation';
+          exp.textContent = 'Explanation: ' + correct.dataset.explain;
+          parent.appendChild(exp);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
